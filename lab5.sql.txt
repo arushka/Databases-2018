@@ -1,0 +1,42 @@
+create database lab5;
+create table customers(
+  customer_id int primary key ,
+  cust_name varchar(50),
+  city varchar(50),
+  grade int,
+  salesman_id int references salesman(salesman_id)
+);
+
+create table salesman(
+  salesman_id int primary key ,
+  name varchar(50),
+  city varchar(50),
+  commission float
+);
+
+create table orders(
+  ord_no int primary key ,
+  purch_amt float,
+  ord_date date,
+  customer_id int references customers(customer_id),
+  salesman_id int references salesman(salesman_id)
+);
+
+SELECT count(purch_amt) from orders;
+SELECT avg(purch_amt) FROM orders;
+
+SELECT count(cust_name) FROM customers
+where cust_name notnull ;
+
+SELECT min(purch_amt) FROM orders;
+SELECT cust_name FROM customers where cust_name LIKE '%b';
+
+SELECT * FROM orders
+where customer_id IN (SELECT customer_id from customers where city='New York');
+
+SELECT * FROM customers
+where customer_id IN (SELECT customer_id from orders where purch_amt>10);
+
+SELECT sum(grade) FROM customers;
+SELECT cust_name FROM customers where cust_name notnull ;
+SELECT max(grade) FROM customers;
