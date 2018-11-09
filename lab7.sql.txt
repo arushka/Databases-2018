@@ -1,0 +1,8 @@
+CREATE DATABASE lab7;
+
+CREATE INDEX countries_name ON countries(name);
+CREATE INDEX employees_name_surname ON employees(name,surname);
+create index salary ON employees(salary);
+create index employees.substring ON employees(substring(name from 1 for 4));
+create index department_id ON employees(department_id,salary);
+create index budget ON departments(department_id, budget);
